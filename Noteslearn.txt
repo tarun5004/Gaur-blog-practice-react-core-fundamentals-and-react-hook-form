@@ -1,0 +1,105 @@
+
+
+## 🧠 Flow visually:
+```
+User clicks "Profile"
+       ↓
+URL becomes /profile
+       ↓
+useLocation() → { pathname: '/profile' }
+       ↓
+Home check:    '/profile' === '/'        FALSE → faded
+Profile check: '/profile' === '/profile' TRUE  → underline ✅
+useLocation ek gps ki trahe kaam karta hai jase hi page chnage hota hai condtion FALSEhojati hai or underline / loactioon par ture ho jati hai 
+
+
+
+
+
+stroke kya hai?
+ye ek svg concept hai wk special language hai dwarings/icons banane ke liye images nahi pure code se icons 
+| `stroke="currentColor"` | Line ka color — parent ka color lo |
+| `strokeLinecap="round"` | Line ke ends — rounded (soft look) |
+| `strokeLinejoin="round"` | Lines ka junction — rounded |
+| `fill="none"` | Andar fill mat karo — sirf outline |
+
+
+
+
+
+# 🧠 Grid Columns Samjho
+```
+grid-cols-12 matlab — page ko 12 barabar parts mein baanto
+
+col-span-3  = 3/12  = 25%  (Left)
+col-span-6  = 6/12  = 50%  (Center) ← sabse bada
+col-span-3  = 3/12  = 25%  (Right)
+
+3 + 6 + 3 = 12 ✅ (poora page cover)
+
+
+
+# 🧠 Naye Concepts Samjho
+
+**`-mt-7` — Negative Margin:**
+```
+Avatar ko banner ke UPAR pull karta hai
+Normal mt = neeche dhakelta hai
+Negative -mt = upar kheenchta hai
+```
+
+**`overflow-hidden` on card:**
+```
+Banner bilkul card ke edges tak jaaye
+Bina iske banner card se bahar nikal jaata
+```
+
+**`space-y-4` on column:**
+```
+Column ke andar jo bhi cards hain
+unke beech automatically gap aata hai
+Har item ke beech = 4 units space
+```
+
+**`text-gbtext/60`:**
+```
+/60 = 60% opacity
+Matlab text thoda faded/muted dikhega
+/50 = aur zyada faded
+/70 = thoda kam faded
+
+
+
+
+home centre ui -------
+**`flex-shrink-0` on Avatar:**
+```
+Jab flex container chhota hota hai
+Avatar ko shrink mat hone do
+Size hamesha fixed rakho
+```
+
+**`resize-none` on Textarea:**
+```
+By default textarea ko user
+drag karke resize kar sakta hai
+resize-none = woh option hatao
+Clean look rehta hai
+```
+
+**`focus:border-primary`:**
+```
+Jab user input pe click kare (focus)
+Border color primary (purple) ho jaaye
+Better UX — user ko pata chale
+kaunsa field active hai
+```
+
+**`flex-1` on input:**
+```
+Available space ka poora
+faayda uthao — stretch ho jaao
+Select ke baad jo bacha
+woh sab input le lega
+
+
