@@ -1,10 +1,44 @@
 import PostCard from '../components/PostCard'
 import { dummyPosts, topPosts } from '../utils/dummyPosts'
+import { savePosts, loadPosts } from '../utils/localStorage'
 import { useState } from 'react'
 
 const Home = () => {
-  const [posts] = useState(dummyPosts)
+  const [posts, setPosts] = useState(loadPosts() || dummyPosts)
+  
+  const [postText, setPostText] = useState('')
+  const [postImage, setPostImage] = useState('')
+  const [postCategory, setPostCategory] = useState('General')
+
   const [trending] = useState(topPosts)
+
+  const handlePost = () => {
+      //if kuch nahi likha luch matt karo
+      if (!postText.trim()) return
+
+      //new post object
+      const newPost = {
+        id: Date.now(),
+        author: 'Alex Rivers',
+        role: 'BLOGGER',
+        time: 'Just now',
+        avatar: 'A',
+        content: postText,
+        image: postImage || null,
+        tags: [postCategory],
+      }
+
+      //use state upadate - old posts with new posts 
+      const updatedPosts = [newPost, ...posts]
+      setPosts(updatedPosts)  // state update
+      savePosts(updatedPosts) // local storage update
+
+      //clear input fields
+      setPostText('')
+      setPostImage('')
+      setPostCategory('General')
+
+  }
 
   return (
     <div className="bg-bg min-h-screen">
@@ -92,6 +126,8 @@ const Home = () => {
                   placeholder="Share your latest insight..."
                   className="w-full bg-bg rounded-lg p-3 text-gbtext text-sm resize-none outline-none border border-border focus:border-primary transition-colors"
                   rows={3}
+                  value={postText}
+                  onChange={(e) => setPostText(e.target.value)}
                 />
 
               </div>
@@ -102,8 +138,14 @@ const Home = () => {
                   type="text"
                   placeholder="Image URL (optional)"
                   className="flex-1 bg-bg border border-border rounded-lg px-3 py-2 text-sm text-gbtext outline-none focus:border-primary transition-colors"
+                  value={postImage}
+                  onChange={(e) => setPostImage(e.target.value)}
                 />
-                <select className="bg-bg border border-border rounded-lg px-3 py-2 text-sm text-gbtext outline-none">
+                <select
+                  className="bg-bg border border-border rounded-lg px-3 py-2 text-sm text-gbtext outline-none"
+                  value={postCategory}
+                  onChange={(e) => setPostCategory(e.target.value)}
+                >
                   <option>General</option>
                   <option>Tech</option>
                   <option>Design</option>
@@ -125,7 +167,8 @@ const Home = () => {
                 </div>
 
                 {/* right - post button */}
-                <button className="bg-primary text-white text-sm font-medium px-5 py-2 rounded-lg hover:bg-primary/90 transition-colors">
+                <button onClick={handlePost}
+                className="bg-primary text-white text-sm font-medium px-5 py-2 rounded-lg hover:bg-primary/90 transition-colors">
                   Post
                 </button>
 
